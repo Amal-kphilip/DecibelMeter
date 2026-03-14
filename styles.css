@@ -354,10 +354,11 @@ body.theme-light .reference-item.active {
   position: sticky;
   bottom: 0;
   z-index: 15;
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem max(1rem, calc((100vw - 1100px) / 2 + 1rem));
   margin: 0.9rem;
@@ -367,6 +368,7 @@ body.theme-light .reference-item.active {
 }
 
 .pill-button {
+  width: auto;
   min-width: 0;
   padding: 0.85rem 1.2rem;
   border: 3px solid var(--line);
@@ -375,9 +377,9 @@ body.theme-light .reference-item.active {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 auto;
   gap: 0.6rem;
   font-weight: 900;
+  white-space: nowrap;
   box-shadow: 4px 4px 0 #000000;
   transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
 }
@@ -555,10 +557,6 @@ body.theme-light .reference-item.active {
   .control-bar {
     justify-content: center;
   }
-
-  .pill-button {
-    flex: 0 0 auto;
-  }
 }
 
 @media (max-width: 560px) {
@@ -593,7 +591,8 @@ body.theme-light .reference-item.active {
   }
 
   .control-bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
     justify-content: center;
     gap: 0.75rem;
     padding: 0.7rem;
@@ -611,5 +610,16 @@ body.theme-light .reference-item.active {
     left: 0.75rem;
     bottom: 5.5rem;
     width: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .control-bar {
+    grid-template-columns: repeat(2, max-content);
+  }
+
+  #resetButton {
+    grid-column: 1 / -1;
+    justify-self: center;
   }
 }
