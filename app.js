@@ -204,7 +204,7 @@
   const saved = loadSavedState();
 
   const state = {
-    theme: saved.theme || "dark",
+    theme: saved.theme || "light",
     language: saved.language || "en",
     calibrationOffset: clamp(saved.calibrationOffset ?? 95, 70, 120),
     smoothing: clamp(saved.smoothing ?? 0.82, 0, 0.95),
