@@ -1,5 +1,5 @@
 (function () {
-  const STORAGE_KEY = "sound-meter-state-v1";
+  const STORAGE_KEY = "sound-meter-state-v2";
   const MAX_DB = 140;
   const MIN_DB = 0;
   const CHART_MAX_DB = 110;
