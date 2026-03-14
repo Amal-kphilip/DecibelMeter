@@ -356,6 +356,8 @@ body.theme-light .reference-item.active {
   z-index: 15;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem max(1rem, calc((100vw - 1100px) / 2 + 1rem));
   margin: 0.9rem;
@@ -365,14 +367,15 @@ body.theme-light .reference-item.active {
 }
 
 .pill-button {
-  min-width: 8.75rem;
-  padding: 0.95rem 1.3rem;
+  min-width: 0;
+  padding: 0.85rem 1.2rem;
   border: 3px solid var(--line);
   background: #ffffff;
   color: #111111;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
   gap: 0.6rem;
   font-weight: 900;
   box-shadow: 4px 4px 0 #000000;
@@ -550,12 +553,11 @@ body.theme-light .reference-item.active {
   }
 
   .control-bar {
-    justify-content: stretch;
+    justify-content: center;
   }
 
   .pill-button {
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 0 0 auto;
   }
 }
 
@@ -591,10 +593,16 @@ body.theme-light .reference-item.active {
   }
 
   .control-bar {
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 0.8rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.7rem;
     margin: 0.55rem;
+  }
+
+  .pill-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
   }
 
   .panel {
