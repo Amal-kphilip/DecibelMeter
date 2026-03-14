@@ -1,5 +1,6 @@
 :root {
   color-scheme: light;
+  --header-offset: 6.25rem;
   --bg-main: #dadada;
   --bg-secondary: #f1f1f1;
   --panel: #ffffff;
@@ -85,15 +86,16 @@ button {
 .topbar {
   position: fixed;
   top: 0;
-  left: 1rem;
-  right: 1rem;
+  left: 0;
+  right: 0;
   z-index: 20;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.2rem;
-  margin: 1rem 0 0;
+  margin: 0;
+  border-radius: 0 0 24px 24px;
 }
 
 .brand {
@@ -171,7 +173,7 @@ body.theme-dark .select-field select:focus-visible {
 .page {
   width: min(1080px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 6.9rem 0 7.8rem;
+  padding: calc(var(--header-offset) + 1.25rem) 0 7.8rem;
   display: grid;
   gap: 1.35rem;
 }
@@ -522,16 +524,17 @@ body.theme-dark .select-field select:focus-visible {
 }
 
 @media (max-width: 560px) {
+  :root {
+    --header-offset: 5.7rem;
+  }
+
   .topbar {
     padding: 0.8rem 0.9rem;
-    left: 0.55rem;
-    right: 0.55rem;
-    margin: 0.55rem 0 0;
+    border-radius: 0 0 20px 20px;
   }
 
   .page {
     width: calc(100% - 0.75rem);
-    padding-top: 6.3rem;
   }
 
   .meter-section {

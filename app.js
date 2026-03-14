@@ -4,170 +4,59 @@
   const MIN_DB = 0;
   const CHART_MAX_DB = 110;
   const SAMPLE_INTERVAL_MS = 180;
-  const availableLanguages = [
-    { code: "en", label: "English" },
-    { code: "hi", label: "Hindi" },
-    { code: "bn", label: "Bengali" },
-    { code: "te", label: "Telugu" },
-    { code: "mr", label: "Marathi" },
-    { code: "ta", label: "Tamil" },
-    { code: "ur", label: "Urdu" },
-    { code: "gu", label: "Gujarati" },
-    { code: "kn", label: "Kannada" },
-    { code: "ml", label: "Malayalam" },
-    { code: "pa", label: "Punjabi" },
-    { code: "or", label: "Odia" },
-    { code: "as", label: "Assamese" },
-    { code: "es", label: "Spanish" },
-    { code: "fr", label: "French" },
-    { code: "de", label: "German" },
-    { code: "pt", label: "Portuguese" },
-    { code: "ru", label: "Russian" },
-    { code: "ar", label: "Arabic" },
-    { code: "zh", label: "Chinese" },
-    { code: "ja", label: "Japanese" },
-    { code: "ko", label: "Korean" },
-    { code: "tr", label: "Turkish" },
-    { code: "it", label: "Italian" },
-    { code: "id", label: "Indonesian" },
-  ];
-
   const referenceLevels = [
-    { db: 140, color: "#d93025", label: { en: "Fireworks", hi: "पटाखे" } },
-    { db: 130, color: "#ea4335", label: { en: "Jackhammer, jet takeoff", hi: "जैकहैमर, जेट टेकऑफ" } },
-    { db: 120, color: "#f55353", label: { en: "Ambulance, thunderclap", hi: "एम्बुलेंस, गरज" } },
-    { db: 110, color: "#ff6b57", label: { en: "Concerts, symphony orchestra", hi: "कॉन्सर्ट, सिम्फनी ऑर्केस्ट्रा" } },
-    { db: 100, color: "#ff8752", label: { en: "Subway train, car horn", hi: "मेट्रो ट्रेन, कार हॉर्न" } },
-    { db: 90, color: "#ff9e48", label: { en: "Lawnmower, shouted conversation", hi: "लॉनमावर, जोर से बात" } },
-    { db: 80, color: "#ff8c1a", label: { en: "Busy traffic, blender", hi: "भारी ट्रैफिक, ब्लेंडर" } },
-    { db: 70, color: "#f59f00", label: { en: "Restaurant, washing machine", hi: "रेस्टोरेंट, वॉशिंग मशीन" } },
-    { db: 60, color: "#ffb11c", label: { en: "Conversation, background music", hi: "बातचीत, बैकग्राउंड म्यूजिक" } },
-    { db: 50, color: "#ffaa26", label: { en: "Quiet office, refrigerator hum", hi: "शांत दफ्तर, फ्रिज की आवाज़" } },
-    { db: 40, color: "#43a047", label: { en: "Quiet room, light rain", hi: "शांत कमरा, हल्की बारिश" } },
-    { db: 30, color: "#34a853", label: { en: "Quiet library, soft whisper", hi: "शांत पुस्तकालय, धीमी फुसफुसाहट" } },
-    { db: 20, color: "#2e7d32", label: { en: "Clock ticking", hi: "घड़ी की टिक-टिक" } },
-    { db: 10, color: "#1b66c9", label: { en: "Breathing, rustling leaves", hi: "सांस लेना, पत्तों की सरसराहट" } },
-    { db: 0, color: "#185abc", label: { en: "Threshold of hearing", hi: "श्रवण की सीमा" } },
+    { db: 140, color: "#d93025", label: "Fireworks" },
+    { db: 130, color: "#ea4335", label: "Jackhammer, jet takeoff" },
+    { db: 120, color: "#f55353", label: "Ambulance, thunderclap" },
+    { db: 110, color: "#ff6b57", label: "Concerts, symphony orchestra" },
+    { db: 100, color: "#ff8752", label: "Subway train, car horn" },
+    { db: 90, color: "#ff9e48", label: "Lawnmower, shouted conversation" },
+    { db: 80, color: "#ff8c1a", label: "Busy traffic, blender" },
+    { db: 70, color: "#f59f00", label: "Restaurant, washing machine" },
+    { db: 60, color: "#ffb11c", label: "Conversation, background music" },
+    { db: 50, color: "#ffaa26", label: "Quiet office, refrigerator hum" },
+    { db: 40, color: "#43a047", label: "Quiet room, light rain" },
+    { db: 30, color: "#34a853", label: "Quiet library, soft whisper" },
+    { db: 20, color: "#2e7d32", label: "Clock ticking" },
+    { db: 10, color: "#1b66c9", label: "Breathing, rustling leaves" },
+    { db: 0, color: "#185abc", label: "Threshold of hearing" },
   ];
 
   const translations = {
-    en: {
-      title: "Sound Decibel Meter",
-      statusIdle: "Ready to measure",
-      threshold: "Threshold of Hearing",
-      min: "MIN",
-      avg: "AVG",
-      max: "MAX",
-      peak: "PEAK",
-      historyTitle: "Live history",
-      historyHint: "Approximate dB SPL, calibrated in browser",
-      referenceTitle: "REFERENCE SOUND LEVELS (APPROX. dB SPL)",
-      referenceHint: "Tap Start and compare your current reading against familiar sounds.",
-      start: "Start",
-      pause: "Pause",
-      resume: "Resume",
-      reset: "Reset",
-      helpTitle: "How to use it",
-      helpCopy:
-        "Allow microphone access, press Start, and the meter will show a live weighted estimate of sound level. For the most accurate reading, compare it to a known sound meter and adjust calibration in Settings.",
-      tip1: "Use the app over HTTPS or localhost so the browser can access the microphone.",
-      tip2: "Disable loud music or fans nearby while calibrating your baseline.",
-      tip3: "Pause keeps your current session. Reset clears the chart and statistics.",
-      settingsTitle: "Meter settings",
-      calibration: "Calibration offset",
-      smoothing: "Smoothing",
-      historyWindow: "History points",
-      settingsNote: "Browsers cannot know your microphone's exact SPL sensitivity, so calibration aligns the meter with your device.",
-      languageTitle: "Language",
-      languageSelectLabel: "Select language",
-      languageHint: "Choose your preferred language for the interface.",
-      running: "Listening for sound...",
-      paused: "Paused",
-      awaitingPermission: "Waiting for microphone access...",
-      permissionDenied: "Microphone access was blocked. Please allow access and try again.",
-      noSupport: "This browser does not support microphone measurement.",
-      secureContext: "Open this page on localhost or HTTPS to enable the microphone.",
-      levelBandLabel: "dB band",
-      chartAxis: "Level (dB)",
-    },
-    hi: {
-      title: "साउंड डेसीबल मीटर",
-      statusIdle: "मापने के लिए तैयार",
-      threshold: "श्रवण की सीमा",
-      min: "न्यूनतम",
-      avg: "औसत",
-      max: "अधिकतम",
-      peak: "पीक",
-      historyTitle: "लाइव इतिहास",
-      historyHint: "अनुमानित dB SPL, ब्राउज़र में कैलिब्रेटेड",
-      referenceTitle: "संदर्भ ध्वनि स्तर (अनुमानित dB SPL)",
-      referenceHint: "स्टार्ट दबाएँ और वर्तमान रीडिंग की तुलना आम ध्वनियों से करें।",
-      start: "स्टार्ट",
-      pause: "रोकें",
-      resume: "जारी रखें",
-      reset: "रीसेट",
-      helpTitle: "इसे कैसे उपयोग करें",
-      helpCopy:
-        "माइक्रोफ़ोन की अनुमति दें, स्टार्ट दबाएँ, और मीटर ध्वनि स्तर का लाइव वेटेड अनुमान दिखाएगा। अधिक सटीक रीडिंग के लिए किसी ज्ञात साउंड मीटर से तुलना करें और सेटिंग्स में कैलिब्रेशन समायोजित करें।",
-      tip1: "माइक्रोफ़ोन उपयोग करने के लिए इस पेज को HTTPS या localhost पर खोलें।",
-      tip2: "बेसलाइन कैलिब्रेट करते समय पास का शोर, तेज़ संगीत या पंखा बंद रखें।",
-      tip3: "पॉज़ वर्तमान सत्र को रोके रखता है। रीसेट चार्ट और आँकड़े साफ़ करता है।",
-      settingsTitle: "मीटर सेटिंग्स",
-      calibration: "कैलिब्रेशन ऑफसेट",
-      smoothing: "स्मूदिंग",
-      historyWindow: "हिस्ट्री पॉइंट्स",
-      settingsNote: "ब्राउज़र आपके माइक्रोफ़ोन की सटीक SPL संवेदनशीलता नहीं जान सकता, इसलिए कैलिब्रेशन आपके डिवाइस के लिए मीटर को मिलाता है।",
-      languageTitle: "भाषा",
-      languageSelectLabel: "भाषा चुनें",
-      languageHint: "इंटरफ़ेस के लिए अपनी पसंदीदा भाषा चुनें।",
-      running: "ध्वनि सुनी जा रही है...",
-      paused: "रुका हुआ",
-      awaitingPermission: "माइक्रोफ़ोन अनुमति की प्रतीक्षा है...",
-      permissionDenied: "माइक्रोफ़ोन अनुमति अवरुद्ध है। कृपया अनुमति दें और फिर प्रयास करें।",
-      noSupport: "यह ब्राउज़र माइक्रोफ़ोन मापन का समर्थन नहीं करता।",
-      secureContext: "माइक्रोफ़ोन चालू करने के लिए इस पेज को localhost या HTTPS पर खोलें।",
-      levelBandLabel: "dB सीमा",
-      chartAxis: "स्तर (dB)",
-    },
-    ml: {
-      title: "സൗണ്ട് ഡെസിബൽ മീറ്റർ",
-      statusIdle: "അളക്കാൻ തയ്യാറാണ്",
-      threshold: "ശ്രവണ പരിധി",
-      min: "കുറഞ്ഞത്",
-      avg: "ശരാശരി",
-      max: "കൂടിയത്",
-      peak: "പീക്ക്",
-      historyTitle: "ലൈവ് ചരിത്രം",
-      historyHint: "ബ്രൗസറിൽ കാലിബ്രേറ്റ് ചെയ്ത ഏകദേശം dB SPL",
-      referenceTitle: "റഫറൻസ് ശബ്‌ദ നിലകൾ (ഏകദേശം dB SPL)",
-      referenceHint: "സ്റ്റാർട്ട് അമർത്തി വായന പരിചിതമായ ശബ്‌ദങ്ങളുമായി താരതമ്യം ചെയ്യുക.",
-      start: "സ്റ്റാർട്ട്",
-      pause: "താമസിപ്പിക്കുക",
-      resume: "തുടരുക",
-      reset: "റീസെറ്റ്",
-      helpTitle: "ഇത് ഉപയോഗിക്കുന്ന വിധം",
-      helpCopy:
-        "മൈക്രോഫോൺ അനുമതി നൽകുക, സ്റ്റാർട്ട് അമർത്തുക, തുടർന്ന് മീറ്റർ ശബ്‌ദ നിലയുടെ ലൈവ് കണക്ക് കാണിക്കും. കൂടുതൽ കൃത്യതയ്ക്കായി പരിചിതമായ ഒരു സൗണ്ട് മീറ്ററുമായി താരതമ്യം ചെയ്ത് സെറ്റിംഗ്സിൽ കാലിബ്രേഷൻ ക്രമീകരിക്കുക.",
-      tip1: "മൈക്രോഫോൺ ഉപയോഗിക്കാൻ ഈ പേജ് HTTPS അല്ലെങ്കിൽ localhost വഴി തുറക്കുക.",
-      tip2: "ബേസ്ലൈൻ കാലിബ്രേറ്റ് ചെയ്യുമ്പോൾ അടുത്തുള്ള ശബ്ദം, വലിയ സംഗീതം, ഫാൻ എന്നിവ കുറയ്ക്കുക.",
-      tip3: "Pause നിലവിലെ സെഷൻ നിലനിർത്തും. Reset ചാർട്ടും കണക്ക് വിവരങ്ങളും മായ്ക്കും.",
-      settingsTitle: "മീറ്റർ ക്രമീകരണങ്ങൾ",
-      calibration: "കാലിബ്രേഷൻ ഓഫ്‌സെറ്റ്",
-      smoothing: "സ്മൂത്തിംഗ്",
-      historyWindow: "ഹിസ്റ്ററി പോയിന്റുകൾ",
-      settingsNote: "ബ്രൗസറിന് നിങ്ങളുടെ മൈക്രോഫോണിന്റെ കൃത്യമായ SPL സെൻസിറ്റിവിറ്റി അറിയില്ല, അതിനാൽ കാലിബ്രേഷൻ ഉപകരണത്തിന് മീറ്റർ ഒത്താക്കുന്നു.",
-      languageTitle: "ഭാഷ",
-      languageSelectLabel: "ഭാഷ തിരഞ്ഞെടുക്കുക",
-      languageHint: "ഇന്റർഫേസിനായി നിങ്ങൾ ഇഷ്ടപ്പെടുന്ന ഭാഷ തിരഞ്ഞെടുക്കുക.",
-      running: "ശബ്‌ദം കേൾക്കുന്നു...",
-      paused: "താമസിപ്പിച്ചു",
-      awaitingPermission: "മൈക്രോഫോൺ അനുമതിക്കായി കാത്തിരിക്കുന്നു...",
-      permissionDenied: "മൈക്രോഫോൺ അനുമതി നിരസിക്കപ്പെട്ടു. അനുമതി നൽകി വീണ്ടും ശ്രമിക്കുക.",
-      noSupport: "ഈ ബ്രൗസർ മൈക്രോഫോൺ അളക്കൽ പിന്തുണയ്ക്കുന്നില്ല.",
-      secureContext: "മൈക്രോഫോൺ സജീവമാക്കാൻ ഈ പേജ് localhost അല്ലെങ്കിൽ HTTPS വഴി തുറക്കുക.",
-      levelBandLabel: "dB പരിധി",
-      chartAxis: "നില (dB)",
-    },
+    title: "Sound Decibel Meter",
+    statusIdle: "Ready to measure",
+    threshold: "Threshold of Hearing",
+    min: "MIN",
+    avg: "AVG",
+    max: "MAX",
+    peak: "PEAK",
+    historyTitle: "Live history",
+    historyHint: "Approximate dB SPL, calibrated in browser",
+    referenceTitle: "REFERENCE SOUND LEVELS (APPROX. dB SPL)",
+    referenceHint: "Tap Start and compare your current reading against familiar sounds.",
+    start: "Start",
+    pause: "Pause",
+    resume: "Resume",
+    reset: "Reset",
+    helpTitle: "How to use it",
+    helpCopy:
+      "Allow microphone access, press Start, and the meter will show a live weighted estimate of sound level. For the most accurate reading, compare it to a known sound meter and adjust calibration in Settings.",
+    tip1: "Use the app over HTTPS or localhost so the browser can access the microphone.",
+    tip2: "Disable loud music or fans nearby while calibrating your baseline.",
+    tip3: "Pause keeps your current session. Reset clears the chart and statistics.",
+    settingsTitle: "Meter settings",
+    calibration: "Calibration offset",
+    smoothing: "Smoothing",
+    historyWindow: "History points",
+    settingsNote: "Browsers cannot know your microphone's exact SPL sensitivity, so calibration aligns the meter with your device.",
+    running: "Listening for sound...",
+    paused: "Paused",
+    awaitingPermission: "Waiting for microphone access...",
+    permissionDenied: "Microphone access was blocked. Please allow access and try again.",
+    noSupport: "This browser does not support microphone measurement.",
+    secureContext: "Open this page on localhost or HTTPS to enable the microphone.",
+    levelBandLabel: "dB band",
+    chartAxis: "Level (dB)",
   };
 
   const ui = {
@@ -190,7 +79,6 @@
     panels: Array.from(document.querySelectorAll(".panel")),
     closeButtons: Array.from(document.querySelectorAll(".close-panel")),
     panelTriggers: Array.from(document.querySelectorAll("[data-panel-target]")),
-    languageSelect: document.getElementById("languageSelect"),
     calibrationRange: document.getElementById("calibrationRange"),
     calibrationOutput: document.getElementById("calibrationOutput"),
     smoothingRange: document.getElementById("smoothingRange"),
@@ -205,7 +93,6 @@
 
   const state = {
     theme: saved.theme || "light",
-    language: saved.language || "en",
     calibrationOffset: clamp(saved.calibrationOffset ?? 95, 70, 120),
     smoothing: clamp(saved.smoothing ?? 0.82, 0, 0.95),
     historyPoints: clamp(saved.historyPoints ?? 90, 30, 180),
@@ -232,10 +119,6 @@
     chartDpr: Math.max(1, Math.min(2, window.devicePixelRatio || 1)),
   };
 
-  if (!availableLanguages.some((language) => language.code === state.language)) {
-    state.language = "en";
-  }
-
   function loadSavedState() {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
@@ -247,7 +130,6 @@
   function saveState() {
     const snapshot = {
       theme: state.theme,
-      language: state.language,
       calibrationOffset: state.calibrationOffset,
       smoothing: state.smoothing,
       historyPoints: state.historyPoints,
@@ -264,7 +146,7 @@
   }
 
   function getText(key) {
-    return translations[state.language]?.[key] || translations.en[key] || key;
+    return translations[key] || key;
   }
 
   function setStatus(key) {
@@ -293,7 +175,7 @@
 
       const label = document.createElement("span");
       label.className = "reference-label";
-      label.textContent = item.label[state.language] || item.label.en;
+      label.textContent = item.label;
 
       row.append(swatch, db, label);
       fragment.appendChild(row);
@@ -302,22 +184,8 @@
     ui.referenceList.replaceChildren(fragment);
   }
 
-  function populateLanguageSelect() {
-    const fragment = document.createDocumentFragment();
-
-    availableLanguages.forEach((language) => {
-      const option = document.createElement("option");
-      option.value = language.code;
-      option.textContent = language.label;
-      fragment.appendChild(option);
-    });
-
-    ui.languageSelect.replaceChildren(fragment);
-    ui.languageSelect.value = state.language;
-  }
-
   function applyTranslations() {
-    document.documentElement.lang = state.language;
+    document.documentElement.lang = "en";
     document.querySelectorAll("[data-i18n]").forEach((element) => {
       const key = element.dataset.i18n;
       element.textContent = getText(key);
@@ -328,7 +196,6 @@
       : getText("pause");
 
     renderReferenceList();
-    ui.languageSelect.value = state.language;
     updateMeter(state.currentDb);
   }
 
@@ -367,7 +234,7 @@
     ui.scaleFill.style.width = `${(clampedDb / MAX_DB) * 100}%`;
 
     const reference = getReferenceForDb(clampedDb);
-    ui.thresholdLabel.textContent = reference.label[state.language] || reference.label.en;
+    ui.thresholdLabel.textContent = reference.label;
     ui.levelBand.textContent = `${getText("levelBandLabel")}: ${Math.max(reference.db - 10, 0)} - ${reference.db}`;
 
     Array.from(ui.referenceList.children).forEach((row) => {
@@ -724,13 +591,6 @@
       }
     });
 
-    ui.languageSelect.addEventListener("change", () => {
-      state.language = ui.languageSelect.value;
-      applyTranslations();
-      drawChart();
-      saveState();
-    });
-
     ui.calibrationRange.addEventListener("input", () => {
       state.calibrationOffset = Number(ui.calibrationRange.value);
       ui.calibrationOutput.value = `${state.calibrationOffset} dB`;
@@ -770,7 +630,6 @@
 
   function initialize() {
     applyTheme();
-    populateLanguageSelect();
     updateSettingsUi();
     applyTranslations();
     resetStats();
