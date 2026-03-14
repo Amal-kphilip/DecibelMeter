@@ -645,17 +645,18 @@
     const height = ui.chart.height;
     const dpr = state.chartDpr;
     const styles = getComputedStyle(document.body);
+    const isCompactChart = ui.chart.getBoundingClientRect().width < 420;
     const padTop = 18 * dpr;
     const padRight = 16 * dpr;
     const padBottom = 30 * dpr;
-    const padLeft = 40 * dpr;
+    const padLeft = (isCompactChart ? 52 : 40) * dpr;
     const chartWidth = width - padLeft - padRight;
     const chartHeight = height - padTop - padBottom;
 
     ctx.clearRect(0, 0, width, height);
     ctx.strokeStyle = styles.getPropertyValue("--chart-grid").trim();
     ctx.lineWidth = 1;
-    ctx.font = `${11 * dpr}px ${styles.getPropertyValue("--font-sans").trim()}`;
+    ctx.font = `${(isCompactChart ? 10 : 11) * dpr}px ${styles.getPropertyValue("--font-sans").trim()}`;
     ctx.fillStyle = styles.getPropertyValue("--muted").trim();
 
     [0, 20, 40, 60, 80, 100, 110].forEach((mark) => {
@@ -664,14 +665,16 @@
       ctx.moveTo(padLeft, y);
       ctx.lineTo(width - padRight, y);
       ctx.stroke();
-      ctx.fillText(String(mark), 6 * dpr, y + 4 * dpr);
+      ctx.fillText(String(mark), 10 * dpr, y + 4 * dpr);
     });
 
-    ctx.save();
-    ctx.translate(12 * dpr, padTop + chartHeight / 2);
-    ctx.rotate(-Math.PI / 2);
-    ctx.fillText(getText("chartAxis"), 0, 0);
-    ctx.restore();
+    if (!isCompactChart) {
+      ctx.save();
+      ctx.translate(16 * dpr, padTop + chartHeight / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(getText("chartAxis"), 0, 0);
+      ctx.restore();
+    }
 
     if (state.history.length === 0) {
       return;

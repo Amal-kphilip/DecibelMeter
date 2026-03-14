@@ -83,15 +83,17 @@ button {
 }
 
 .topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 1rem;
+  right: 1rem;
   z-index: 20;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.2rem;
-  margin: 1rem 1rem 0;
+  margin: 1rem 0 0;
 }
 
 .brand {
@@ -169,7 +171,7 @@ body.theme-dark .select-field select:focus-visible {
 .page {
   width: min(1080px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 1.5rem 0 7.8rem;
+  padding: 6.9rem 0 7.8rem;
   display: grid;
   gap: 1.35rem;
 }
@@ -522,11 +524,14 @@ body.theme-dark .select-field select:focus-visible {
 @media (max-width: 560px) {
   .topbar {
     padding: 0.8rem 0.9rem;
-    margin: 0.55rem 0.55rem 0;
+    left: 0.55rem;
+    right: 0.55rem;
+    margin: 0.55rem 0 0;
   }
 
   .page {
     width: calc(100% - 0.75rem);
+    padding-top: 6.3rem;
   }
 
   .meter-section {
